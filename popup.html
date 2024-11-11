@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto Form Filler</title>
+</head>
+<body>
+    <h2>Add new rule</h2>
+    <input type="text" id="inputName" placeholder="Input name">
+    <input type="text" id="inputValue" placeholder="Value">
+    <button id="addButton">Add</button>
+
+    <h2>Actual Rules</h2>
+    <div id="rules-list"></div>
+
+    <script src="popup.js"></script>
+    <script>
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            displayRules();
+
+            document.getElementById('addButton').addEventListener('click', function() {
+                let name = document.getElementById('inputName').value;
+                let value = document.getElementById('inputValue').value;
+                if (name && value) {
+                    addRule(name, value);
+                    // Vide les champs après l'ajout
+                    document.getElementById('inputName').value = '';
+                    document.getElementById('inputValue').value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
