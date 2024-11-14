@@ -13,22 +13,5 @@
     <div id="rules-list"></div>
 
     <script src="popup.js"></script>
-    <script>
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            displayRules();
-
-            document.getElementById('addButton').addEventListener('click', function() {
-                let name = document.getElementById('inputName').value;
-                let value = document.getElementById('inputValue').value;
-                if (name && value) {
-                    addRule(name, value);
-                    // Vide les champs après l'ajout
-                    document.getElementById('inputName').value = '';
-                    document.getElementById('inputValue').value = '';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
