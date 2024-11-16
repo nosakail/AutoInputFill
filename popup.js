@@ -14,6 +14,24 @@ function formatSelector(inputName) {
     return `input[name="${cleanName}"], #${cleanName}, input[id="${cleanName}"]`;
 }
 
+// Fonction pour simplifier l'affichage du sélecteur
+function simplifySelector(selector) {
+    // Cherche un pattern comme input[name="xyz"]
+    const nameMatch = selector.match(/input\[name="([^"]+)"\]/);
+    if (nameMatch) {
+        return nameMatch[1]; // Retourne juste la partie entre guillemets
+    }
+    
+    // Si c'est un ID (#xyz)
+    const idMatch = selector.match(/#([^,\s]+)/);
+    if (idMatch) {
+        return idMatch[1];
+    }
+    
+    // Si on ne trouve pas de pattern connu, retourne le sélecteur tel quel
+    return selector;
+}
+
 // Fonction pour ajouter une nouvelle règle
 function addRule(inputName, inputValue) {
     console.log('addRule called with:', inputName, inputValue);
@@ -58,7 +76,8 @@ function displayRules() {
             
             // Créer les éléments individuellement au lieu d'utiliser innerHTML
             let span = document.createElement('span');
-            span.textContent = `${rule.selector} : ${rule.value}`;
+            // Utilise la version simplifiée du sélecteur
+            span.textContent = `${simplifySelector(rule.selector)} : ${rule.value}`;
             
             let button = document.createElement('button');
             button.textContent = 'Delete';
