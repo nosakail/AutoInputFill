@@ -1,12 +1,26 @@
 console.log('Popup script loaded');
 
+// Fonction pour formater le sélecteur
+function formatSelector(inputName) {
+    // Retire les caractères spéciaux
+    const cleanName = inputName.replace(/[\[\]"#.]/g, '');
+    
+    // Si c'est déjà un sélecteur complet, on le garde
+    if (inputName.includes('[') || inputName.includes('#') || inputName.includes('.')) {
+        return inputName;
+    }
+    
+    // Crée un tableau de sélecteurs possibles
+    return `input[name="${cleanName}"], #${cleanName}, input[id="${cleanName}"]`;
+}
+
 // Fonction pour ajouter une nouvelle règle
 function addRule(inputName, inputValue) {
     console.log('addRule called with:', inputName, inputValue);
     chrome.storage.sync.get('rules', function(data) {
         let rules = data.rules || [];
         rules.push({
-            selector: inputName,
+            selector: formatSelector(inputName), // Utilise la fonction de formatage
             value: inputValue
         });
         
