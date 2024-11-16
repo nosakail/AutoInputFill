@@ -57,6 +57,35 @@ function displayRules() {
     });
 }
 
+// Fonction pour appliquer les règles
+function applyRules() {
+    console.log('Applying rules...');
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        const currentTab = tabs[0];
+        if (!currentTab?.id) {
+            console.log('No active tab found');
+            return;
+        }
+
+        console.log('Sending message to tab:', currentTab.url);
+        
+        // Vérifie d'abord si le content script est chargé
+        chrome.tabs.sendMessage(currentTab.id, {action: "ping"})
+            .then(response => {
+                // Si on reçoit une réponse, on peut envoyer les règles
+                return chrome.tabs.sendMessage(currentTab.id, {action: "fillForms"});
+            })
+            .then(response => {
+                console.log('Rules applied successfully:', response);
+            })
+            .catch(error => {
+                console.log('Error:', error);
+                // Si erreur, on recharge la page
+                chrome.tabs.reload(currentTab.id);
+            });
+    });
+}
+
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
@@ -71,4 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('inputValue').value = '';
         }
     });
+
+    // Ajoute l'écouteur pour le bouton Apply
+    document.getElementById('applyButton').addEventListener('click', applyRules);
 }); 
