@@ -119,6 +119,16 @@ function applyRules() {
     });
 }
 
+// Fonction pour supprimer toutes les règles
+function deleteAllRules() {
+    if (confirm('Are you sure you want to delete all rules?')) {
+        chrome.storage.sync.set({ rules: [] }, function() {
+            console.log('All rules deleted!');
+            displayRules();
+        });
+    }
+}
+
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
@@ -136,4 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ajoute l'écouteur pour le bouton Apply
     document.getElementById('applyButton').addEventListener('click', applyRules);
+
+    // Ajoute l'écouteur pour le bouton Delete All
+    document.getElementById('deleteAllButton').addEventListener('click', deleteAllRules);
 }); 
