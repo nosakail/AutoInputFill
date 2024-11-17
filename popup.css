@@ -269,4 +269,17 @@ input[type="text"]:focus, input[type="email"]:focus {
 .delete-all-button:focus-visible {
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+/* Ajout des styles pour l'état désactivé */
+.help-text.disabled {
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+/* Style pour le compteur */
+.help-text .counter {
+    font-size: 0.8em;
+    margin-left: 5px;
 } 

@@ -162,7 +162,7 @@ function showPageInputs() {
                         inputsList.appendChild(inputInfo);
                     });
                 } else {
-                    inputsList.innerHTML = '<div>No visible input fields found on this page. Try reloading the page.</div>';
+                    inputsList.innerHTML = '<div>No visible input fields found on this page. Click again in succession to debug.</div>';
                 }
             })
             .catch(error => {
@@ -177,6 +177,37 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
     displayRules();
 
+    const helpText = document.getElementById('helpText');
+    
+    // Désactive le lien au démarrage
+    helpText.classList.add('disabled');
+    
+    // Ajoute un span pour le compteur
+    const counter = document.createElement('span');
+    counter.className = 'counter';
+    helpText.appendChild(counter);
+    
+    // Compte à rebours de 15 secondes
+    let secondsLeft = 15;
+    counter.textContent = `(${secondsLeft}s)`;
+    
+    const timer = setInterval(() => {
+        secondsLeft--;
+        counter.textContent = `(${secondsLeft}s)`;
+        
+        if (secondsLeft <= 0) {
+            clearInterval(timer);
+            helpText.classList.remove('disabled');
+            counter.remove();
+            // Ajoute l'écouteur d'événements seulement après le délai
+            helpText.addEventListener('click', function(e) {
+                if (!helpText.classList.contains('disabled')) {
+                    showPageInputs();
+                }
+            });
+        }
+    }, 1000);
+
     document.getElementById('addButton').addEventListener('click', function() {
         let name = document.getElementById('inputName').value;
         let value = document.getElementById('inputValue').value;
@@ -187,12 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Ajoute l'écouteur pour le bouton Apply
     document.getElementById('applyButton').addEventListener('click', applyRules);
-
-    // Ajoute l'écouteur pour le bouton Delete All
     document.getElementById('deleteAllButton').addEventListener('click', deleteAllRules);
-
-    // Ajoute l'écouteur pour le texte d'aide
-    document.getElementById('helpText').addEventListener('click', showPageInputs);
 }); 
