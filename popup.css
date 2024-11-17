@@ -149,4 +149,56 @@ input[type="text"]:focus, input[type="email"]:focus {
       110% 10%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
+}
+
+/* Style pour les règles dans Actual Rules */
+.rule-item {
+    margin-bottom: 10px;  
+    padding: 5px;         
+    display: flex;        
+    align-items: center;  
+    gap: 10px;           
+}
+
+#rules-list {
+    margin: 10px 0;      
+    padding: 5px;        
+}
+
+/* Style pour les boutons delete */
+.delete-button {
+  background-color: #ffffff;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.5rem;
+  color: #f20808;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1rem;
+  padding: 4px 8px;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  height: 25px;
+  width: 65px;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.delete-button:hover {
+  background-color: #f9fafb;
+}
+
+.delete-button:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.1);
+  outline-offset: 2px;
+}
+
+.delete-button:focus-visible {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 } 

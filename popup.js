@@ -74,17 +74,16 @@ function displayRules() {
             let ruleElement = document.createElement('div');
             ruleElement.className = 'rule-item';
             
-            // Créer les éléments individuellement au lieu d'utiliser innerHTML
-            let span = document.createElement('span');
-            // Utilise la version simplifiée du sélecteur
-            span.textContent = `${simplifySelector(rule.selector)} : ${rule.value}`;
+            let ruleText = document.createElement('span');
+            ruleText.textContent = `${simplifySelector(rule.selector)} : ${rule.value}`;
             
-            let button = document.createElement('button');
-            button.textContent = 'Delete';
-            button.addEventListener('click', () => deleteRule(index));
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete-button';
+            deleteButton.onclick = () => deleteRule(index);
             
-            ruleElement.appendChild(span);
-            ruleElement.appendChild(button);
+            ruleElement.appendChild(ruleText);
+            ruleElement.appendChild(deleteButton);
             rulesContainer.appendChild(ruleElement);
         });
     });
