@@ -26,9 +26,29 @@
     background: #e0e0e0;
 }
 
-input[type="text"] {
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 200px;
+input[type="text"], input[type="email"] {
+    width: 280px;
+    height: 15px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1.5px solid lightgrey;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+    margin-bottom: 8px;
     display: block;
+    font-size: 13px;
+}
+
+input[type="text"]:hover, input[type="email"]:hover {
+    border: 2px solid lightgrey;
+    box-shadow: 0px 0px 20px -17px;
+}
+
+input[type="text"]:active, input[type="email"]:active {
+    transform: scale(0.98);
+}
+
+input[type="text"]:focus, input[type="email"]:focus {
+    border: 2px solid grey;
 } 
