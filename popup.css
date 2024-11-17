@@ -231,4 +231,42 @@ input[type="text"]:focus, input[type="email"]:focus {
 
 .apply-button:active {
   transform: translateY(-1px);
+}
+
+/* Style pour le bouton Delete All */
+.delete-all-button {
+  background-color: #ffffff;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.5rem;
+  color: #ff0000;          
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1rem;
+  padding: 4px 8px;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  height: 30px;            
+  width: 100px;             
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.delete-all-button:hover {
+  background-color: #f9fafb;
+}
+
+.delete-all-button:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.1);
+  outline-offset: 2px;
+}
+
+.delete-all-button:focus-visible {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 } 
