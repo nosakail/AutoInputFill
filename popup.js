@@ -129,6 +129,50 @@ function deleteAllRules() {
     }
 }
 
+// Fonction pour afficher les inputs de la page
+function showPageInputs() {
+    const inputsList = document.getElementById('inputsList');
+    inputsList.innerHTML = 'Scanning...';  // Feedback immédiat
+    inputsList.style.display = 'block';
+    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        const currentTab = tabs[0];
+        if (!currentTab?.id) return;
+
+        chrome.tabs.sendMessage(currentTab.id, {action: "scanPage"})
+            .then(response => {
+                console.log('Received response in popup:', response);
+                
+                if (response && response.inputs && response.inputs.length > 0) {
+                    inputsList.innerHTML = '<div>Available inputs on this page:</div>';
+                    
+                    response.inputs.forEach(input => {
+                        const inputInfo = document.createElement('div');
+                        inputInfo.className = 'input-info';
+                        
+                        // Affiche le nom le plus approprié
+                        const displayName = input.name || input.id;
+                        inputInfo.textContent = `${displayName} (${input.type})`;
+                        
+                        // Rend l'élément cliquable
+                        inputInfo.style.cursor = 'pointer';
+                        inputInfo.addEventListener('click', () => {
+                            document.getElementById('inputName').value = displayName;
+                        });
+                        
+                        inputsList.appendChild(inputInfo);
+                    });
+                } else {
+                    inputsList.innerHTML = '<div>No visible input fields found on this page. Try reloading the page.</div>';
+                }
+            })
+            .catch(error => {
+                console.log('Error during scan:', error);
+                inputsList.innerHTML = '<div>Error scanning page. Try reloading the page.</div>';
+            });
+    });
+}
+
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
@@ -149,4 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ajoute l'écouteur pour le bouton Delete All
     document.getElementById('deleteAllButton').addEventListener('click', deleteAllRules);
+
+    // Ajoute l'écouteur pour le texte d'aide
+    document.getElementById('helpText').addEventListener('click', showPageInputs);
 }); 

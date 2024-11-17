@@ -50,6 +50,37 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({status: 'alive'});
         return;
     }
+    if (message.action === "scanPage") {
+        console.log('Scanning page for inputs...');
+        
+        // Ajout d'un petit délai pour s'assurer que la page est complètement chargée
+        setTimeout(() => {
+            const inputs = document.querySelectorAll('input');
+            console.log('Found raw inputs:', inputs.length);
+            
+            const inputsInfo = Array.from(inputs)
+                .filter(input => {
+                    return input.type !== 'hidden' && 
+                           input.type !== 'submit' && 
+                           input.type !== 'button' &&
+                           (input.name || input.id);
+                })
+                .map(input => ({
+                    name: input.name || '',
+                    id: input.id || '',
+                    type: input.type || ''
+                }));
+
+            console.log('Filtered inputs to send:', inputsInfo);
+            
+            sendResponse({
+                status: 'success',
+                inputs: inputsInfo
+            });
+        }, 500);
+        
+        return true;  // Indique que nous allons envoyer une réponse asynchrone
+    }
 });
 
 console.log('Content script loaded and listening for messages'); 
