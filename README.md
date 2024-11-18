@@ -13,10 +13,10 @@ Auto Form Filler is a Chrome extension designed to automate form filling across 
 - Debug mode with input field detection
 
 ## Installation
-1. Download the extension files
-2. Open Chrome and go to `chrome://extensions/`
-3. Enable "Developer mode" in the top right corner
-4. Click "Load unpacked" and select the extension directory
+1. git clone https://github.com/nosakail/AutoInputFill.git
+2. Open your browser go to extensions/add on page 
+3. Enable "Developer mode" (possible in the top right corner)
+4. Click "Load unpacked extension" and select the extension directory
 5. The Auto Form Filler icon should now appear in your Chrome toolbar
 
 ## Usage
