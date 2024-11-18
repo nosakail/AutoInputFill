@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Auto Form Filler",
-  "version": "1.0",
-  "description": "--",
+  "version": "1.0.0",
+  "author": "Yassine Saddiki",
+  "description": "Auto Form Filler helps you save time by automatically filling web forms with custom rules. Create, manage, and apply form-filling rules across any website. Perfect for testing, data entry, and repetitive form filling tasks.",
   "permissions": [
     "activeTab",
     "storage",
