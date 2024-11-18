@@ -5,6 +5,7 @@ Auto Form Filler is a Chrome extension designed to automate form filling across 
 
 ## Demonstration
 Clic to watch video demonstration
+
 [![Watch video](https://img.youtube.com/vi/woydl-YdEks/0.jpg)](https://youtu.be/woydl-YdEks?si=OlZZpsXG1-pk9CHV)
 
 ## Features
